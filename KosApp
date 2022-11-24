@@ -1,0 +1,406 @@
+from kivymd.app import App
+from kivy.base import Builder
+import kivy.uix.image
+import kivy.uix.textinput
+
+class ModalViewApp( App):
+    def build(self):
+        #Cоздаем модальное окно и атрибуту auto_dismiss присваиваем значение False для того чтобы окно закрывалось только по нажатию кнопки
+        modal = ModalView(size_hint=(None ,None), size =(400 ,400), auto_dismiss=False)
+        bl = BoxLayout(orientation ='vertical', size_hint=(None ,None))
+        label = Label(text='Модальное окно', size_hint=(None ,None))
+        btn_close = Button(text='Закрыть', size_hint=(None ,None))
+        #Привязываем событию по нажатию на кнопку метод закрытия модального окна
+        btn_close.bind(on_press=modal.dismiss)
+        #Добавляем label и кнопку закрытия модального окна в Box Layout
+        bl.add_widget(label)
+        bl.add_widget(btn_close)
+        #Добавляем в модальное окно макет Box Layout
+        modal.add_widget(bl)
+        #Создаем кнопку открытия модального окна и привязываем событию по нажатию на копку метод открытия модального окна
+        btn_open = Button(text = 'Открыть модальное окно', size_hint=(None , None), size=( 200 , 100 ), pos_hint = {'x' : 0.37 , 'y' : 0 })
+        btn_open.bind(on_press = modal.open)
+        return btn_open
+
+
+class m(App):
+    def build(self):
+        return      Builder.load_string("""
+ScreenManager:
+    id:m
+    
+    Screen:
+         
+        name:"a"
+        canvas:
+            Color:
+                rgba:0.1,0,0.1,1
+            Rectangle:
+                size:self.size
+                pos:self.pos
+        Image:
+            source : "fon.jpg"   
+            allow_stretch: "True"
+            pos_hint:{"centrr_x":.5,"center_y":.625}
+        
+        
+        Label:
+            text: "Kostyagram 2.0.0"
+            
+            pos_hint:{"center_x":.860,"center_y":.98}
+        Label:
+            text: "KOSTYAGRAM"
+            font_weight: "100"
+            color :0.1,0.6, 0.6,1
+            font_size :"50sp"
+            pos_hint:{"center_x":.5, "center_y":.9}
+        Label:
+            text: "                В связи с уходом \\n                    Инстаграмма \\n                       из России\\n При поддержке правительства РФ"
+            color :0.2,0,0,.1
+            font_size :"12sp"
+            pos_hint:{"center_x":.5, "center_y":.7}
+        
+        Label:
+            text: "KostyaGram - не хочешь не бери"
+            color :0.1,0.9,0.1,1
+            font_size :"22sp"
+            pos_hint:{"center_x":.5, "center_y":.3}
+            
+            
+        Button:
+            size_hint:.4,.1
+            pos_hint:{"center_x":.25,"center_y":.08}
+            text:"Отзывы"
+            background_color :"22DDFF"
+            border_radius: "5px"
+            on_press:
+                m.current = "b"
+                m.transition.direction = 'left'
+        Button:
+            size_hint:.4,.1
+            pos_hint:{"center_x":.25,"center_y":.2}
+            text:"Купить грамм"
+            on_press:
+                m.current ="f"
+                m.transition.direction = 'up' 
+        Button:
+            size_hint:.4,.1
+            pos_hint:{"center_x":.75,"center_y":.2}
+            text:"Продать грамм"
+            on_press:
+                m.current ="k"
+                m.transition.direction = 'down' 
+        Button:
+            size_hint:.4,.1
+            pos_hint:{"center_x":.75,"center_y":.08}
+            text:"Регистрация"
+            on_press:
+                m.current = "e"
+                m.transition.direction = 'right'   
+          
+    Screen:
+        name:"b"  
+        canvas:
+            Color:
+                rgba:0.2,0,0.1,1
+            Rectangle:
+                size:self.size
+                pos:self.pos
+        Label:
+            text:"В касашку"
+            font_size :"42sp"
+            pos_hint:{"center_x":.5,"center_y":.7}
+        Button:
+            text:"Еще отзывы"
+            size_hint:.3,.1
+            pos_hint:{"center_x":.17,"center_y":.1}
+            on_press:
+                m.current ="c"
+                m.transition.direction = 'left'
+        Button:
+            text:"Оставить отзыв"
+            size_hint:.3,.1
+            pos_hint:{"center_x":.5,"center_y":.1}
+            on_press:
+                m.current ="c"
+                m.transition.direction = 'down' 
+        Button:
+            text:"В начало"
+            size_hint:.3,.1
+            pos_hint:{"center_x":.83,"center_y":.1}
+            on_press:
+                m.current ="a"
+                m.transition.direction = 'up'
+    Screen:
+        name:"c"
+        canvas:
+            Color:
+                rgba:0,0.1,0.1,1
+            Rectangle:
+                size:self.size
+                pos:self.pos
+        Label:
+            text:"  Кладмен пидор\\nОператора обнял"
+            text_align: "right"
+            font_size :"42sp"
+            pos_hint:{"center_x":.5,"center_y":.7}
+        Button:
+            text:"Продолжить"
+            size_hint:.3,.1
+            pos_hint:{"center_x":.17,"center_y":.1}
+            on_press:
+                m.current ="d"
+                m.transition.direction = 'left'
+        Button:
+            text:"Оставить отзыв"
+            size_hint:.3,.1
+            pos_hint:{"center_x":.5,"center_y":.1}
+            on_press:
+                m.current ="c"
+                m.transition.direction = 'left'                        
+        Button:
+            text:"В начало"
+            size_hint:.3,.1
+            pos_hint:{"center_x":.83,"center_y":.1}
+            on_press:
+                m.current ="a"
+                m.transition.direction = 'up'             
+                
+    Screen:
+        name:"d"
+        canvas:
+            Color:
+                rgba:0,0.3,0.1,1
+            Rectangle:
+                size:self.size
+                pos:self.pos
+        Label:
+            text:"     Еще один \\n хороший отзыв"
+            font_size :"42sp"
+            pos_hint:{"center_x":.5,"center_y":.7}
+        Button:
+            text:"В начало"
+            size_hint:.5,.1
+            pos_hint:{"center_x":.5,"center_y":.1}
+            on_press:
+                m.current ="a"
+                m.transition.direction = 'up'
+    Screen:       
+        name:"e"
+        canvas:
+            Color:
+                rgba:0.3,0.3,1,1
+            Rectangle:
+                size:self.size
+                pos:self.pos
+        Image:
+            source : "fon.jpg"   
+            allow_stretch: "True"
+            pos_hint:{"centrr_x":.5,"center_y":.625}
+        RstDocument:
+            text: "Г Л А В А 1"
+            
+        Button:
+            size_hint:.4,.1
+            pos_hint:{"center_x":.25,"center_y":.1}
+            text:"Зарегистрироваться"
+            on_press:
+                m.current ="a"
+                m.transition.direction = 'up'    
+        Button:
+            size_hint:.4,.1
+            pos_hint:{"center_x":.75,"center_y":.1}
+            text:"В начало"
+            on_press:
+                m.current ="a"
+                m.transition.direction = 'up'                 
+                        
+    Screen:
+        name:"f"  
+        canvas:
+            Color:
+                rgba:0.6,0,1,1
+            Rectangle:
+                size:self.size
+                pos:self.pos
+        Label:
+            text:"   Чтобы купить GRAM\\n       кидайте на киви\\n         89136309789\\n                 900₽ \\n        и жми дальше"
+            font_size :"32sp"
+            pos_hint:{"center_x":.5,"center_y":.7}
+        Button:
+            text:"Дальше"
+            size_hint:.5,.1
+            pos_hint:{"center_x":.5,"center_y":.1}
+            on_press:
+                m.current ="g"
+                m.transition.direction = 'up'
+    Screen:
+        name:"g"
+        canvas:
+            Color:
+                rgba:0.2,0.4,0.1,1
+            Rectangle:
+                size:self.size
+                pos:self.pos
+        Label:
+            text:"Оплата проверена"
+            font_size :"42sp"
+            pos_hint:{"center_x":.5,"center_y":.7}
+        Button:
+            text:"Продолжить"
+            size_hint:.4,.1
+            pos_hint:{"center_x":.27,"center_y":.1}
+            on_press:
+                m.current ="h"
+                m.transition.direction = 'up'
+        Button:
+            text:"В начало"
+            size_hint:.4,.1
+            pos_hint:{"center_x":.75,"center_y":.1}
+            on_press:
+                m.current ="h"
+                m.transition.direction = 'down'            
+    Screen:
+        name:"h"
+        canvas:
+            Color:
+                rgba:0,0,0.1,1
+            Rectangle:
+                size:self.size
+                pos:self.pos
+        Label:
+            text:"Получай адресок \\n все ровно будет\\n     обещаю брат"
+            font_size :"42sp"
+            pos_hint:{"center_x":.5,"center_y":.7}
+        Button:
+            text:"Проложить маршрут"
+            size_hint:.5,.1
+            pos_hint:{"center_x":.5,"center_y":.1}
+            on_press:
+                m.current ="a"
+                m.transition.direction = 'down'  
+    Screen:
+        name:"k"
+        canvas:
+            Color:
+                rgba:0.2,0.4,0.1,1
+            Rectangle:
+                size:self.size
+                pos:self.pos
+        Label:
+            text:"  Если у вас есть лишний\\n                  GRAM \\n   вы можете его продать\\n через сервис KostyaGram"
+            font_size :"30sp"
+            pos_hint:{"center_x":.5,"center_y":.7}
+        Button:
+            text:"Продать"
+            size_hint:.4,.1
+            pos_hint:{"center_x":.25,"center_y":.1}
+            on_press:
+                m.current ="l"
+                m.transition.direction = 'down'    
+        Button:
+            text:"В начало"
+            size_hint:.4,.1
+            pos_hint:{"center_x":.75,"center_y":.1}
+            on_press:
+                m.current ="a"
+                m.transition.direction = 'down'  
+    Screen:
+        name:"l"
+        canvas:
+            Color:
+                rgba:0.2,0.4,0.1,1
+            Rectangle:
+                size:self.size
+                pos:self.pos
+        Label:
+            text:"Введите адрес\\n       клада:"
+            font_size :"42sp"
+            pos_hint:{"center_x":.5,"center_y":.7}
+        TextInput:
+            size_hint: .6,0.12
+            font_size: "24sp"
+            pos_hint:{"center_x":.5,"center_y":.55}
+        Button:
+            text:"Получить оплату"
+            size_hint:.4,.1
+            pos_hint:{"center_x":.25,"center_y":.1}
+            on_press:
+                m.current ="m"
+                m.transition.direction = 'down'
+        Button:
+            text:"В начало"
+            size_hint:.4,.1
+            pos_hint:{"center_x":.75,"center_y":.1}
+            on_press:
+                m.current ="a"
+                m.transition.direction = 'down'  
+    Screen:
+        name:"m"
+        canvas:
+            Color:
+                rgba:0.2,0.4,0.1,1
+            Rectangle:
+                size:self.size
+                pos:self.pos
+        Label:
+            text:"  Введите киви \\n  для выплаты:"
+            font_size :"42sp"
+            pos_hint:{"center_x":.5,"center_y":.7}
+        TextInput:
+            size_hint: .5,0.06
+            font_size: "30sp"
+            pos_hint:{"center_x":.5,"center_y":.55}
+        
+        Button:
+            text:"Получить выплату"
+            size_hint:.4,.1
+            pos_hint:{"center_x":.25,"center_y":.1}
+            on_press:
+                m.current ="n"
+                m.transition.direction = 'down'    
+        Button:
+            text:"В начало"
+            size_hint:.4,.1
+            pos_hint:{"center_x":.75,"center_y":.1}
+            on_press:
+                m.current ="a"
+                m.transition.direction = 'down'                          
+    Screen:
+        name:"n"
+        canvas:
+            Color:
+                rgba:0.2,0.4,0.1,1
+            Rectangle:
+                size:self.size
+                pos:self.pos
+        Label:
+            text:"  Выплата отправлена"
+            font_size :"36sp"
+            pos_hint:{"center_x":.5,"center_y":.7}
+        
+        Button:
+            text:"Продать еще"
+            size_hint:.4,.1
+            pos_hint:{"center_x":.25,"center_y":.1}
+            on_press:
+                m.current ="k"
+                m.transition.direction = 'down'    
+        Button:
+            text:"В начало"
+            size_hint:.4,.1
+            pos_hint:{"center_x":.75,"center_y":.1}
+            on_press:
+                m.current ="a"
+                m.transition.direction = 'down'   
+    Screen:         
+        name : "z"              
+        class: "ModalViewApp().run()"
+               
+                                                                    
+                                                                                                                        
+        """)
+
+
+
+m().run()
